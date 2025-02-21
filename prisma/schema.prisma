@@ -1,0 +1,69 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model member {
+  mem_id     Int         @id @default(autoincrement())
+  mem_name   String
+  mem_phone  String
+  mem_email  String      @unique
+  membership membership?
+  issuances  issuance[]
+}
+
+model  membership {
+  membership_id Int    @id @default(autoincrement())
+  member_id     Int    @unique
+  status        String
+  member        member @relation(fields: [member_id], references: [mem_id], onDelete: Cascade)
+}
+
+model collection {
+  collection_id   Int    @id @default(autoincrement())
+  collection_name String
+  books           book[]
+}
+
+model category {
+  cat_id       Int     @id @default(autoincrement())
+  cat_name     String
+  sub_cat_name String?
+  books        book[]
+}
+
+model book {
+  book_id            Int      @id @default(autoincrement())
+  book_name          String
+  book_cat_id        Int
+  book_collection_id Int
+  book_launch_date   DateTime
+  book_publisher     String
+
+  category   category   @relation(fields: [book_cat_id], references: [cat_id], onDelete: Cascade)
+  collection collection @relation(fields: [book_collection_id], references: [collection_id], onDelete: Cascade)
+  issuances  issuance[]
+}
+
+model issuance {
+  issuance_id        Int      @id @default(autoincrement())
+  book_id            Int
+  issuance_member    Int
+  issued_by          String
+  issuance_date      DateTime
+  target_return_date DateTime
+  issuance_status    String
+
+  book   book   @relation(fields: [book_id], references: [book_id], onDelete: Cascade)
+  member member @relation(fields: [issuance_member], references: [mem_id], onDelete: Cascade)
+}
