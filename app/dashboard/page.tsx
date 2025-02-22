@@ -18,7 +18,7 @@ export default function Dashboard() {
         <h2 className="text-2xl font-semibold text-gray-800 mb-4">
           Quick Links
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
           <Link href="pages/books">
             <div className="p-4 bg-blue-500 text-white font-medium text-center rounded-lg shadow hover:bg-blue-600 transition">
               Manage Books
@@ -32,6 +32,12 @@ export default function Dashboard() {
           <Link href="pages/issuances">
             <div className="p-4 bg-red-500 text-white font-medium text-center rounded-lg shadow hover:bg-red-600 transition">
               Manage Issuances
+            </div>
+          </Link>
+
+          <Link href="/analytics">
+            <div className="p-4 bg-yellow-500 text-white font-medium text-center rounded-lg shadow hover:bg-blue-600 transition">
+              Analytics
             </div>
           </Link>
         </div>
