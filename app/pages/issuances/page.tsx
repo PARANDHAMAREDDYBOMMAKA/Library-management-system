@@ -1,3 +1,5 @@
+"use client"
+
 import React, { useEffect, useState } from "react";
 import IssuanceList from "./IssuanceList";
 import { getIssuances } from "../../services/issuances";

@@ -47,7 +47,7 @@ model book {
   book_name          String
   book_cat_id        Int
   book_collection_id Int
-  book_launch_date   DateTime
+  book_launch_date   DateTime  @default(now())
   book_publisher     String
 
   category   category   @relation(fields: [book_cat_id], references: [cat_id], onDelete: Cascade)
@@ -60,8 +60,8 @@ model issuance {
   book_id            Int
   issuance_member    Int
   issued_by          String
-  issuance_date      DateTime
-  target_return_date DateTime
+  issuance_date      DateTime @default(now())
+  target_return_date DateTime 
   issuance_status    String
 
   book   book   @relation(fields: [book_id], references: [book_id], onDelete: Cascade)

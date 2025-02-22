@@ -1,3 +1,5 @@
+"use client"
+
 import React, { useEffect, useState } from "react";
 import MemberList from "./MemberList";
 import { getMembers } from "../../services/members";

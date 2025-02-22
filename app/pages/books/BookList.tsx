@@ -32,7 +32,12 @@ interface Book {
   book_publisher: string;
 }
 
-const BookList = () => {
+interface Book {
+  book_name: string;
+  book_publisher: string;
+}
+
+const BookList = ({ books }: { books: Book[] }) => {
   const { data, loading, error } = useFetch("/api/books");
 
   if (loading) return <p>Loading...</p>;
@@ -42,8 +47,8 @@ const BookList = () => {
     <div>
       <h2 className="text-xl font-bold">Book List</h2>
       <ul>
-        {data.map((book: any) => (
-          <li key={book.book_id}>
+        {books.map((book) => (
+          <li key={book.book_name}>
             {book.book_name} - {book.book_publisher}
           </li>
         ))}

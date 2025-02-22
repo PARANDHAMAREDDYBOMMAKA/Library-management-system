@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "issuance" ALTER COLUMN "issuance_date" SET DEFAULT CURRENT_TIMESTAMP;
