@@ -1,15 +1,25 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "../../../lib/prisma";
 
-export async function GET(req: NextRequest, context: { params: { id: string } }) {
-  const { params } = await context;
+// GET handler
+export async function GET(
+  req: NextRequest,
+  context: { params: Promise<{ id: string }> }
+) {
+  // Await the params before using them
+  const { id } = await context.params;
+  if (!id) {
+    return NextResponse.json({ error: "Invalid ID" }, { status: 400 });
+  }
+
   try {
     const issuance = await prisma.issuance.findUnique({
-      where: { issuance_id: Number(params.id) }, 
+      where: { issuance_id: Number(id) },
       include: { book: true, member: true },
     });
 
-    if (!issuance) return NextResponse.json({ error: "Issuance not found" }, { status: 404 });
+    if (!issuance)
+      return NextResponse.json({ error: "Issuance not found" }, { status: 404 });
 
     return NextResponse.json(issuance);
   } catch (error) {
@@ -17,11 +27,20 @@ export async function GET(req: NextRequest, context: { params: { id: string } })
   }
 }
 
-export async function PUT(req: NextRequest, { params }: { params: { id: string } }) {
+// PUT handler
+export async function PUT(
+  req: NextRequest,
+  context: { params: Promise<{ id: string }> }
+) {
+  const { id } = await context.params;
+  if (!id) {
+    return NextResponse.json({ error: "Invalid ID" }, { status: 400 });
+  }
+
   try {
     const body = await req.json();
     const updatedIssuance = await prisma.issuance.update({
-      where: { issuance_id: Number(params.id) },
+      where: { issuance_id: Number(id) },
       data: body,
     });
 
@@ -31,10 +50,19 @@ export async function PUT(req: NextRequest, { params }: { params: { id: string }
   }
 }
 
-export async function DELETE(req: NextRequest, { params }: { params: { id: string } }) {
+// DELETE handler
+export async function DELETE(
+  req: NextRequest,
+  context: { params: Promise<{ id: string }> }
+) {
+  const { id } = await context.params;
+  if (!id) {
+    return NextResponse.json({ error: "Invalid ID" }, { status: 400 });
+  }
+
   try {
     await prisma.issuance.delete({
-      where: { issuance_id: Number(params.id) },
+      where: { issuance_id: Number(id) },
     });
 
     return NextResponse.json({ message: "Issuance deleted successfully" });
