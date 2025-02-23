@@ -36,7 +36,7 @@ export default function Dashboard() {
           </Link>
 
           <Link href="/analytics">
-            <div className="p-4 bg-yellow-500 text-white font-medium text-center rounded-lg shadow hover:bg-blue-600 transition">
+            <div className="p-4 bg-yellow-500 text-white font-medium text-center rounded-lg shadow hover:bg-yellow-600 transition">
               Analytics
             </div>
           </Link>
