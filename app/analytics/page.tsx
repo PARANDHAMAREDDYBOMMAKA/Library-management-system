@@ -1,14 +1,15 @@
 "use client";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation"; // Import useRouter
 
 export default function Analytics() {
-  // Interface for books never borrowed
+  const router = useRouter(); // Initialize router
+
   interface NeverBorrowedBook {
     book_name: string;
     book_publisher: string;
   }
 
-  // Interface for outstanding books
   interface OutstandingBook {
     member: {
       mem_name: string;
@@ -21,19 +22,16 @@ export default function Analytics() {
     target_return_date: string;
   }
 
-  // Interface for top borrowed books
   interface TopBorrowedBook {
     book_name: string;
     timesBorrowed: number;
     uniqueBorrowers: number;
   }
 
-  // State management for analytics data
   const [neverBorrowed, setNeverBorrowed] = useState<NeverBorrowedBook[]>([]);
   const [outstanding, setOutstanding] = useState<OutstandingBook[]>([]);
   const [topBorrowed, setTopBorrowed] = useState<TopBorrowedBook[]>([]);
 
-  // Fetch data from API on component mount
   useEffect(() => {
     fetch("/api/books/never-borrowed")
       .then((res) => res.json())
@@ -50,6 +48,13 @@ export default function Analytics() {
 
   return (
     <div className="p-6">
+
+      <button className="cursor-pointer"
+        onClick={() => router.back()}
+      >
+        ← Back
+      </button>
+
       <h1 className="text-2xl font-bold mb-6 text-center">
         📊 Library Analytics
       </h1>
