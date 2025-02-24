@@ -126,5 +126,24 @@ Open http://localhost:3000 to view the app.
 
 - The easiest way to deploy this Next.js app is with Vercel.
 - For manual deployment, check the [Next.js Documentation](https://nextjs.org/docs).
-### Deployment Link:
+## Deployment Link:
 https://library-management-gamma-nine.vercel.app
+
+## Screenshots
+
+1. The dashboard for the OverDue books
+
+![Dashboard UI](<Screenshot 2025-02-24 at 10.06.35 AM.png>)
+
+2. Books List UI
+![BooksList UI](<Screenshot 2025-02-24 at 10.06.53 AM.png>)
+
+3. Members List UI
+![MembersList UI](<Screenshot 2025-02-24 at 10.07.09 AM.png>)
+
+4. Issuances List UI
+![IssuancesList](<Screenshot 2025-02-24 at 10.07.09 AM-1.png>)
+
+5. Analytics UI based on the SQL queries
+![Books Never Borrowed](<Screenshot 2025-02-24 at 10.08.02 AM.png>)
+![Top 10 books borrowed](<Screenshot 2025-02-24 at 10.08.12 AM.png>)
