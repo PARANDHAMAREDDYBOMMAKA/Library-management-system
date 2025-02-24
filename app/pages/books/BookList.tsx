@@ -13,28 +13,38 @@ interface BookListProps {
 
 const BookList: React.FC<BookListProps> = ({ books }) => {
   if (books.length === 0) {
-    return <p className="text-center text-gray-600">No books available.</p>;
+    return (
+      <p className="text-center text-gray-500 text-lg">No books available.</p>
+    );
   }
 
   return (
-    <div className="max-w-2xl mx-auto mt-6 p-4 bg-white rounded-lg shadow-md">
-      <h2 className="text-2xl font-bold mb-4 text-center">Book List</h2>
-      <table className="w-full border-collapse border border-gray-300">
-        <thead>
-          <tr className="bg-gray-100">
-            <th className="border p-2 text-left">Book Name</th>
-            <th className="border p-2 text-left">Publisher</th>
-          </tr>
-        </thead>
-        <tbody>
-          {books.map((book, index) => (
-            <tr key={index} className="border-b hover:bg-gray-50">
-              <td className="border p-2">{book.book_name}</td>
-              <td className="border p-2">{book.book_publisher}</td>
+    <div className="w-full mt-6 p-6 bg-white rounded-xl shadow-lg">
+      <h2 className="text-3xl font-semibold mb-6 text-center text-gray-800">
+        Book List
+      </h2>
+
+      <div className="overflow-x-auto">
+        <table className="w-full border-collapse rounded-lg overflow-hidden shadow-md">
+          <thead>
+            <tr className="bg-gray-500 text-white">
+              <th className="p-4 text-left">Book Name</th>
+              <th className="p-4 text-left">Publisher</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {books.map((book, index) => (
+              <tr
+                key={index}
+                className="border-b last:border-none hover:bg-blue-50 transition"
+              >
+                <td className="p-4">{book.book_name}</td>
+                <td className="p-4">{book.book_publisher}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };
