@@ -1,7 +1,10 @@
-import { NextResponse, NextRequest } from 'next/server';
-import prisma from '../../lib/prisma';
+import { NextResponse, NextRequest } from "next/server";
+import prisma from "../../lib/prisma";
+import logger from "../../utils/logger";
 
 export async function GET(req: NextRequest) {
+  logger.info("GET /api/overdue - Fetching overdue books");
+
   try {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
@@ -16,7 +19,7 @@ export async function GET(req: NextRequest) {
 
     return NextResponse.json(overdueBooks);
   } catch (error) {
-    console.error(error);
+    logger.error(`ERROR /api/overdue - ${error}`);
     return NextResponse.json({ error: "Internal server error" }, { status: 500 });
   }
 }
