@@ -1,0 +1,34 @@
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: postgres_db
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: library_db
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    restart: always
+
+  app:
+    build: .
+    container_name: nextjs_app
+    depends_on:
+      - db
+    ports:
+      - "3000:3000"
+      - "5555:5555"
+    env_file:
+      - .env
+    environment:
+      - DATABASE_URL=postgresql://user:password@db:5432/library_db?schema=public
+      - LOG_FILE_PATH=/logs/app.log
+    volumes:
+      - ./logs:/logs
+      - ./prisma:/app/prisma
+    restart: always
+
+volumes:
+  pgdata:
