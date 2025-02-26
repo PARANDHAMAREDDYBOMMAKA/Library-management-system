@@ -1,11 +1,13 @@
+version: '3.8'
+
 services:
   db:
     image: postgres:16-alpine
     container_name: postgres_db
     environment:
-      POSTGRES_USER: user
-      POSTGRES_PASSWORD: password
-      POSTGRES_DB: library_db
+      POSTGRES_USER: library_management_989j_user
+      POSTGRES_PASSWORD: BLJT7OlWGyred1mVXfDtXlmsrgvcCPfq
+      POSTGRES_DB: library_management_989j
     volumes:
       - pgdata:/var/lib/postgresql/data
     ports:
@@ -23,7 +25,8 @@ services:
     env_file:
       - .env
     environment:
-      - DATABASE_URL=postgresql://user:password@db:5432/library_db?schema=public
+      - DATABASE_URL=postgresql://library_management_989j_user:BLJT7OlWGyred1mVXfDtXlmsrgvcCPfq@dpg-cusl8trqf0us739lfnsg-a.oregon-postgres.render.com/library_management_989j
+
       - LOG_FILE_PATH=/logs/app.log
     volumes:
       - ./logs:/logs

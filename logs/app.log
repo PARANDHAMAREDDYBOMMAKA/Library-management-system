@@ -182,3 +182,39 @@ Unique constraint failed on the fields: (`mem_email`)
 [2025-02-25 18:57:00] [INFO] - GET /api/books - Fetching all books
 [2025-02-25 18:57:01] [INFO] - GET /api/overdue - Fetching overdue books
 [2025-02-25 18:57:01] [INFO] - GET /api/overdue - Fetching overdue books
+[2025-02-26 07:12:43] [INFO] - GET /api/books - Fetching all books
+[2025-02-26 07:13:47] [INFO] - POST /api/books - Creating a new book
+[2025-02-26 07:13:48] [INFO] - SUCCESS /api/books - Book created with ID 45
+[2025-02-26 07:14:03] [INFO] - PUT /api/books/45 - Book updated successfully
+[2025-02-26 07:14:20] [INFO] - GET /api/books/45 - Book found
+[2025-02-26 07:14:26] [INFO] - DELETE /api/books/45 - Book deleted successfully
+[2025-02-26 07:16:06] [INFO] - GET /api/issuances - Fetching all issuances
+[2025-02-26 07:16:34] [INFO] - GET /api/issuances - Fetching all issuances
+[2025-02-26 07:16:41] [INFO] - POST /api/issuances - Creating a new issuance
+[2025-02-26 07:16:41] [INFO] - SUCCESS /api/issuances - Issuance created with ID 26
+[2025-02-26 07:17:04] [INFO] - PUT /api/issuances/26 - Updating issuance
+[2025-02-26 07:17:05] [INFO] - PUT /api/issuances/26 - Issuance updated successfully
+[2025-02-26 07:17:15] [INFO] - GET /api/issuances/26 - Fetching issuance details
+[2025-02-26 07:17:17] [INFO] - GET /api/issuances/26 - Issuance found
+[2025-02-26 07:17:23] [INFO] - DELETE /api/issuances/26 - Deleting issuance
+[2025-02-26 07:17:24] [INFO] - DELETE /api/issuances/26 - Issuance deleted successfully
+[2025-02-26 07:17:40] [INFO] - GET /api/members - Fetching all members
+[2025-02-26 07:18:08] [INFO] - POST /api/members - Creating a new member
+[2025-02-26 07:18:11] [ERROR] - ERROR /api/members - PrismaClientKnownRequestError: 
+Invalid `__TURBOPACK__imported__module__$5b$project$5d2f$app$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].member.create()` invocation in
+/Users/parandhamareddybommaka/Desktop/Library-management-system/.next/server/chunks/[root of the server]__685c37._.js:228:170
+
+  225 __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$utils$2f$logger$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].info("POST /api/members - Creating a new member");
+  226 try {
+  227     const { mem_id, ...body } = await req.json();
+→ 228     const newMember = await __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["default"].member.create(
+Unique constraint failed on the fields: (`mem_email`)
+[2025-02-26 07:18:24] [INFO] - POST /api/members - Creating a new member
+[2025-02-26 07:18:24] [INFO] - SUCCESS /api/members - Member created with ID 29
+[2025-02-26 07:18:40] [INFO] - PUT /api/members/29 - Updating member
+[2025-02-26 07:18:41] [INFO] - PUT /api/members/29 - Member updated successfully
+[2025-02-26 07:18:50] [INFO] - GET /api/members/29 - Fetching member details
+[2025-02-26 07:18:51] [INFO] - GET /api/members/29 - Member found
+[2025-02-26 07:18:57] [INFO] - DELETE /api/members/29 - Deleting member
+[2025-02-26 07:18:58] [INFO] - DELETE /api/members/29 - Member deleted successfully
+[2025-02-26 02:28:40] [INFO] - GET /api/members - Fetching all members
