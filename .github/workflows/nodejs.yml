@@ -158,7 +158,7 @@ jobs:
           mkdir -p ~/.ssh
           echo "${{ secrets.EC2_SSH_KEY }}" > ~/.ssh/ec2_key.pem
           chmod 600 ~/.ssh/ec2_key.pem
-          echo -e "Host *\n\tStrictHostKeyChecking no\n\tServerAliveInterval 60\n\tServerAliveCountMax 30\n" > ~/.ssh/config
+          echo -e "Host *\n\tStrictHostKeyChecking no\n\tServerAliveInterval 30\n\tServerAliveCountMax 60\n\tTCPKeepAlive yes\n" > ~/.ssh/config
 
       - name: Create deployment package
         run: |
@@ -180,14 +180,24 @@ jobs:
         run: |
           ssh -i ~/.ssh/ec2_key.pem ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} "cd /var/www/app && tar -xzf /tmp/deploy.tar.gz -C current"
 
-      - name: Install dependencies on EC2
+      - name: Create deployment script
         run: |
-          ssh -i ~/.ssh/ec2_key.pem ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} "cd /var/www/app/current && npm ci --production"
+          cat > deploy.sh << 'EOL'
+          #!/bin/bash
+          cd /var/www/app/current
+          npm ci --production
+          pm2 restart app || pm2 start npm --name 'app' -- start
+          echo "Deployment completed successfully"
+          EOL
+          scp -i ~/.ssh/ec2_key.pem deploy.sh ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }}:/tmp/
 
-      - name: Restart application
+      - name: Execute deployment script
         run: |
-          ssh -i ~/.ssh/ec2_key.pem ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} "cd /var/www/app/current && pm2 restart app || pm2 start npm --name 'app' -- start"
+          ssh -i ~/.ssh/ec2_key.pem ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} "chmod +x /tmp/deploy.sh && nohup /tmp/deploy.sh > /tmp/deploy.log 2>&1 &"
+          
+          # Poll for completion
+          ssh -i ~/.ssh/ec2_key.pem ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} "for i in {1..30}; do if grep 'Deployment completed successfully' /tmp/deploy.log > /dev/null; then echo 'Deployment completed successfully'; exit 0; fi; echo 'Waiting for deployment to complete... (attempt $i/30)'; sleep 30; done; echo 'Deployment timed out or failed'; cat /tmp/deploy.log; exit 1"
 
       - name: Cleanup
         run: |
-          ssh -i ~/.ssh/ec2_key.pem ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} "rm /tmp/deploy.tar.gz"
+          ssh -i ~/.ssh/ec2_key.pem ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} "rm /tmp/deploy.tar.gz /tmp/deploy.sh"

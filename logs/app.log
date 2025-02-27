@@ -240,3 +240,7 @@ Please make sure your database server is running at `dpg-cusl8trqf0us739lfnsg-a.
 [2025-02-26 09:27:49] [INFO] - GET /api/top-borrowed - Fetching top 10 most borrowed books
 [2025-02-26 09:28:05] [INFO] - GET /api/issuances - Fetching all issuances
 [2025-02-26 09:28:06] [INFO] - GET /api/overdue - Fetching overdue books
+[2025-02-26 11:18:13] [INFO] - GET /api/overdue - Fetching overdue books
+[2025-02-26 11:24:07] [INFO] - GET /api/overdue - Fetching overdue books
+[2025-02-26 11:26:08] [INFO] - GET /api/overdue - Fetching overdue books
+[2025-02-26 11:36:37] [INFO] - GET /api/overdue - Fetching overdue books
