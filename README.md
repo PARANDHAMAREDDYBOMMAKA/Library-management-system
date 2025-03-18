@@ -2,6 +2,14 @@
 
 A **Library Management System** built using **Next.js, PostgreSQL, and Prisma** to efficiently manage books, members, and issuances.
 
+
+## 🛠 Tech Stack
+
+- **Frontend**: Next.js, Tailwind CSS
+- **Backend**: Next.js API Routes, Prisma ORM
+- **Database**: PostgreSQL (hosted on **Neon**)
+- **Authentication**: API Key for secure access
+
 ## 🚀 Features
 
 - **Database Model**: PostgreSQL schema designed to store books, members, and issuances.
@@ -10,13 +18,6 @@ A **Library Management System** built using **Next.js, PostgreSQL, and Prisma** 
   - Books that have never been borrowed
   - Outstanding books at any given time
   - Top 10 most borrowed books
-
-## 🛠 Tech Stack
-
-- **Frontend**: Next.js, Tailwind CSS
-- **Backend**: Next.js API Routes, Prisma ORM
-- **Database**: PostgreSQL (hosted on **Neon**)
-- **Authentication**: API Key for secure access
 
 ## 📊 SQL Queries
 
